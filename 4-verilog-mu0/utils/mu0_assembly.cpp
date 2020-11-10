@@ -3,6 +3,11 @@
 #include <cctype>
 #include <cassert>
 
+/*  Label syntax:
+    - size >2
+    - Alphanumeric + _ characters
+    - Ends with a :
+*/
 bool mu0_is_label_decl(const string &s)
 {
     if(s.size()<2){
@@ -26,13 +31,15 @@ bool mu0_is_label_decl(const string &s)
     return true;
 }
 
+/*  - Check if it is numeric (with exception of sign +-)
+*/
 bool mu0_is_data(const string &s)
 {
     if(s.empty()){
         return false;
     }
 
-    int pos=0;
+    int pos=0;  // Skip the sign
     if(s[pos]=='-' || s[pos]=='+'){
         pos=pos+1;
     }
@@ -47,6 +54,7 @@ bool mu0_is_data(const string &s)
     return true;
 }
 
+// Goes through all these cases and checks if they are operands
 bool mu0_is_instruction(const string &s)
 {
     if(s=="LDA") return true;
@@ -61,6 +69,8 @@ bool mu0_is_instruction(const string &s)
     return false;
 }
 
+
+// Only STP and OUT do not have operands
 bool mu0_instruction_has_operand(const string &s)
 {
     assert(mu0_is_instruction(s));

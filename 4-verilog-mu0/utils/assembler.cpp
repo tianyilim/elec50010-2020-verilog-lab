@@ -6,14 +6,14 @@
 #include <cassert>
 #include <iomanip> 
 
-string to_hex4(uint16_t x)
+string to_hex4(uint16_t x)  // Returns little-endian?
 {
     char tmp[16]={'0','1','2','3','4','5','6','7','8','9','A','B','C','D','E','F'};
     string res;
-    res.push_back(tmp[(x>>12)&0xF]);
-    res.push_back(tmp[(x>>8)&0xF]);
-    res.push_back(tmp[(x>>4)&0xF]);
-    res.push_back(tmp[(x>>0)&0xF]);
+    res.push_back(tmp[(x>>12)&0xF]);    // Bit masks the 4 MSBs [15..12]
+    res.push_back(tmp[(x>>8)&0xF]);     // Next 4 bits [11..8]
+    res.push_back(tmp[(x>>4)&0xF]);     // Next 4 bits [7..4]
+    res.push_back(tmp[(x>>0)&0xF]);     // LSBs [3..0]
     return res;
 }
 
@@ -33,18 +33,19 @@ int main()
     while(cin >> head){
         if(mu0_is_label_decl(head)){
             head.pop_back(); // remove colon
-            assert(labels.find(head)==labels.end());
-            labels[head]=data_and_instr.size();
+            assert(labels.find(head)==labels.end());    // Check that label decl is unique
+            labels[head]=data_and_instr.size();         // Map the address of the label to the label
+            // Because size corresponds to where the label will point to in memory (the current 'line number' of the instruction)
         
         }else if(mu0_is_instruction(head)){
             string address;
 
             if(mu0_instruction_has_operand(head)){
                 cin >> address;
-                assert(!cin.fail());
+                assert(!cin.fail());    // Don't leave the assembler hanging! Instr must follow by operand.
             }
 
-            data_and_instr.push_back({head,address});
+            data_and_instr.push_back({head,address});   // address and data as a pair
         }else if(mu0_is_data(head)){
             data_and_instr.push_back({head,""});
         }else{

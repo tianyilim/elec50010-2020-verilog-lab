@@ -7,8 +7,8 @@ module multiplier_iterative(
     output logic valid_out,
     output logic[63:0] r
 );
-    logic[31:0] mp, mp_next;
-    logic[63:0] mc, mc_next;
+    logic[31:0] mp, mp_next;    // Multiplier
+    logic[63:0] mc, mc_next;    // Multiplicand
     logic[63:0] acc, acc_next;
     logic[5:0] i, i_next;
 
@@ -23,8 +23,9 @@ module multiplier_iterative(
         end
         else if (i != 32) begin
             acc_next = acc + ( mp[0] ? mc : 0 );
-            mp_next = mp>>1;
-            mc_next = mc<<1;
+            mp_next = mp>>1;    // Right shift the multiplier
+            mc_next = mc<<1;    // Left shift the multiplicand
+            // This essentially performs long multiplication after 32 cycles.
             i_next = i + 1;
         end
     end

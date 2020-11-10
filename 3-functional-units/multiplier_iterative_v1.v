@@ -26,7 +26,7 @@ module multiplier_iterative(
             mp_next = mp>>1;
             mc_next = mc<<1;
             if (mp==0)
-                i_next=32;
+                i_next=32;      // Exit early if nothing left in multiplier
             else
                 i_next = i + 1;
         

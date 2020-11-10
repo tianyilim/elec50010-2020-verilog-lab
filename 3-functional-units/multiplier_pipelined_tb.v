@@ -29,6 +29,7 @@ module multiplier_pipelined_tb(
             @(posedge clk)
 
             // Inject stimulus 1ns before clock edge
+            // use @negedge CLK instead
             #9;
             a = a+32'h23456789;
             b = b+32'h34567891;

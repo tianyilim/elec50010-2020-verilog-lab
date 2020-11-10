@@ -13,14 +13,14 @@ OUT S 1000 print(Acc)
 */
 
 module CPU_MU0_delay1(
-    input logic clk,
-    input logic rst,
-    output logic running,
-    output logic[11:0] address,
-    output logic write,
-    output logic read,
-    output logic[15:0] writedata,
-    input logic[15:0] readdata
+    input logic clk,                    // Clock
+    input logic rst,                    // Reset
+    output logic running,               // Am I operational (not stopped?)
+    output logic[11:0] address,         // Address to read/write to/from
+    output logic write,                 // Write enable
+    output logic read,                  // Read enable(?)
+    output logic[15:0] writedata,       // Write to RAM
+    input logic[15:0] readdata          // Data read from RAM
     );
 
     /* Using an enum to define constants */
@@ -38,10 +38,10 @@ module CPU_MU0_delay1(
 
     /* Another enum to define CPU states. */
     typedef enum logic[2:0] {
-        FETCH_INSTR_ADDR = 3'b000,
-        FETCH_INSTR_DATA = 3'b001,
-        EXEC_INSTR_ADDR  = 3'b010,
-        EXEC_INSTR_DATA  = 3'b011,
+        FETCH_INSTR_ADDR = 3'b000,  // Regular fetch instruction
+        FETCH_INSTR_DATA = 3'b001,  // Instr is out, fetch instruction constant (last 12 bits)
+        EXEC_INSTR_ADDR  = 3'b010,  // Wait for flipflop to output correct thing on bus
+        EXEC_INSTR_DATA  = 3'b011,  // Execute with correct items on acc read bus
         HALTED =      3'b100
     } state_t;
 

@@ -3,14 +3,15 @@
 module add_one_tb(
 );
 
-    logic [8:0] x;
-    logic [8:0] y_expected;
-    wire logic [8:0] y;
+    logic [7:0] x;
+    logic [7:0] y_expected;
+    wire logic [7:0] y;
+
+    // The error was that the bit width of the testbench does not match that of the DUT.
 
     initial begin
         $dumpfile("add_one_tb.vcd");
         $dumpvars(0, add_one_tb);
-
 
         x = 0;
         y_expected = 1;

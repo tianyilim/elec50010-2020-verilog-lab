@@ -6,6 +6,8 @@ module and_not_testbench();
 
     initial begin
         /* INSERT WAVEFORM COMMANDS */
+        $dumpfile("and_not_testbench_waves.vcd");
+        $dumpvars(0,and_not_testbench);
 
         a=0;
         b=0;
@@ -18,16 +20,19 @@ module and_not_testbench();
         a=0;
         b=1;
         #1; // Delay one timeunit
+        $display("a=%d, b=%d, r=%d", a, b, d);
         assert(d==1);
 
         a=1;
         b=0;
         #1; // Delay one timeunit
+        $display("a=%d, b=%d, r=%d", a, b, d);
         assert(d==1);
 
         a=1;
         b=1;
         #1; // Delay one timeunit
+        $display("a=%d, b=%d, r=%d", a, b, d);
         assert(d==0);
     end
 

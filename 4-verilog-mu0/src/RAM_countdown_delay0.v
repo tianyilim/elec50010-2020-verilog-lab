@@ -14,10 +14,10 @@ module RAM_countdown_delay0(
 );
     always_comb begin
         case(address)
-        0 : readdata = 16'h0004;
-        1 : readdata = 16'h2005;
-        2 : readdata = 16'h6001;
-        3 : readdata = 16'h7000;
+        0 : readdata = 16'h0004;    // LDA 4 (0h'A = 0d'10)
+        1 : readdata = 16'h2005;    // ADD 5 (-1)
+        2 : readdata = 16'h6001;    // JNE 1 (Subtract another from acc if not equal to 1)
+        3 : readdata = 16'h7000;    // STOP
         4 : readdata = 16'h000A;
         5 : readdata = 16'hFFFF;
         default : readdata = 16'hXXXX;

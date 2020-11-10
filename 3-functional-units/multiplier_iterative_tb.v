@@ -1,6 +1,3 @@
-
-
-
 module multiplier_iterative_tb(
 );
     logic clk;
@@ -26,7 +23,7 @@ module multiplier_iterative_tb(
         a = 0;
         b = 0;
 
-         repeat (100) begin
+        repeat (100) begin
             @(posedge clk);
             #1;
             valid_in = 1;
@@ -65,7 +62,7 @@ module multiplier_iterative_tb(
             b = b+32'h34567891;
         end
 
-        $display("Finished. Total time = %t", $time);
+        $warning("Finished. Total time = %t", $time);
         $finish;
     end
 

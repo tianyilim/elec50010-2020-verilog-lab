@@ -16,14 +16,14 @@ module ff_tb();
         /* rising edge */
         clk = 1;
         #1;
-        assert(q == 1);
+        assert(q==1);
         #1;
         d=0;          /* Change the register input to 0. */
         #1;
-        assert(q==1); 
+        assert(q==1);   // Should be 0 here
         d=1;          
         #1;
-        assert(q==1); 
+        assert(q==1);   // Should be 1 here
 
         /* falling edge */
         clk = 0;
@@ -47,7 +47,7 @@ module ff_tb();
         assert(q==0); 
         d=1;          
         #1;
-        assert(q==1); 
+        assert(q==0); // Changed to 0 here - no rising edge so can't overwrite
 
 
         $finish;
