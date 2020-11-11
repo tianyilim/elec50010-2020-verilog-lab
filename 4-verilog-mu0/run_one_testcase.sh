@@ -21,7 +21,7 @@ bin/assembler <test/0-assembly/${TESTCASE}.asm.txt >test/1-binary/${TESTCASE}.he
 # Compile a specific simulator for this variant and testbench.
 # -s specifies exactly which testbench should be top-level
 # The -P command is used to modify the RAM_INIT_FILE parameter on the test-bench at compile-time
-iverilog -g 2012 -Wall \
+iverilog -g 2012 \
    src/CPU_MU0_${VARIANT}.v src/CPU_MU0_${VARIANT}_tb.v src/RAM_16x4096_${VARIANT}.v \
    src/CPU_MU0_core.v \
    -s CPU_MU0_${VARIANT}_tb \
