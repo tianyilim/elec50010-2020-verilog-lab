@@ -4,7 +4,7 @@
 ./build_utils.sh
 
 # Add to this list if new testcase added
-TESTS=("delay0" "delay1" "delay1v2" "delay0_abstract" "delay1_abstract")
+TESTS=("delay0" "delay1" "delay1v2" "delay0_abstract" "delay1_abstract" "delay1_pipe")
 
 # Run all the test-cases for each variant
 for i in ${TESTS[@]} ; do
