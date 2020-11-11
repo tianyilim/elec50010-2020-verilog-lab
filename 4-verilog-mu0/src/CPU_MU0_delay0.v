@@ -46,11 +46,11 @@ module CPU_MU0_delay0(
     logic[11:0] pc, pc_next;
     logic[15:0] acc;
 
-    logic[16:0] instr;
+    logic[15:0] instr;
     opcode_t instr_opcode;
-    logic[11:0] instr_constant;    
+    logic[11:0] instr_constant;
 
-    logic[1:0] state;
+    logic[2:0] state;
 
     // Decide what address to put out on the bus, and whether to write
     assign address = (state==FETCH_INSTR) ? pc : instr_constant;
@@ -77,7 +77,7 @@ module CPU_MU0_delay0(
         state = HALTED;
         running = 0;
     end
-    
+
     /* Main CPU sequential update logic. Where combinational logic is simple, it
         has been incorporated directly here, rather than splitting it into another
         block.
@@ -125,8 +125,8 @@ module CPU_MU0_delay0(
                     state <= FETCH_INSTR;
                 end
                 OPCODE_JGE: begin
-                    if (acc > 0) begin
-                        pc <= acc;
+                    if ($signed(acc)> 0) begin
+                        pc <= instr_constant;
                     end
                     else begin
                         pc <= pc_increment;
@@ -163,4 +163,3 @@ module CPU_MU0_delay0(
         end
     end
 endmodule
-

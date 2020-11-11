@@ -12,7 +12,7 @@ OUT S 1000 print(Acc)
 */
 
 module CPU_MU0_core(
-    input wire clk,                 // Set as explicit 
+    input wire clk,                 // Set as explicit
     input wire rst,
     input logic[15:0] instr,
     input logic[15:0] readdata,
@@ -34,7 +34,7 @@ module CPU_MU0_core(
         OPCODE_STP = 4'd7,
         OPCODE_OUT = 4'd8
     } opcode_t;
-    
+
     logic[15:0] acc;
     wire[11:0] pc_increment;
     assign pc_increment = pc + 1;
@@ -67,7 +67,7 @@ module CPU_MU0_core(
                     pc <= pc_increment;
                 end
                 OPCODE_STO: begin
-                    // Writes handled combinatorially                    
+                    // Writes handled combinatorially
                     pc <= pc_increment;
                 end
                 OPCODE_ADD: begin
@@ -82,7 +82,7 @@ module CPU_MU0_core(
                     pc <= instr_constant;
                 end
                 OPCODE_JGE: begin
-                    if (acc > 0) begin
+                    if ($signed(acc) > 0) begin
                         pc <= instr_constant;
                     end else begin
                         pc <= pc_increment;

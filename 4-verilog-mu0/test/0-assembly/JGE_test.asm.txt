@@ -1,0 +1,8 @@
+   LDA NEG_TEN
+Z: ADD ONE
+   OUT
+   JGE Y
+   JMP Z	
+Y: STP
+NEG_TEN: -10
+ONE: 1
