@@ -1,0 +1,8 @@
+   LDA MAX_POS
+   OUT
+Z: ADD 1
+   OUT
+   JGE Z
+   STP
+MAX_POS: 32767
+NEG_ONE: -1

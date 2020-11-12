@@ -1,0 +1,11 @@
+   LDA NEG_TEN
+Z: SUB ONE
+   OUT
+   LDA NEG_TEN
+   ADD NEG_ONE
+   OUT
+   STP
+NEG_TEN: -10
+NEG_ONE: -1
+FIVE: 5
+ONE: 1

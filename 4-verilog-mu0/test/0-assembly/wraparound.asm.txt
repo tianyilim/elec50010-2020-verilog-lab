@@ -1,0 +1,9 @@
+   LDA TEN
+Z: ADD NEG_ONE
+   OUT
+   JMP 4095
+   ADD NEG_ONE
+   OUT
+   STP
+TEN: 10
+NEG_ONE: -1
